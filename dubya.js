@@ -2,12 +2,21 @@
 const execSync = require('child_process').execSync
 
 const Dub = {}
-Dub.copy_key = 3676
-Dub.paste_key = 54
+
+// Shift
+Dub.copy_key = 54
+// Control
+Dub.paste_key = 3613
+
+// Used to compare two taps
 Dub.last_copy_tap_date = 0
 Dub.last_paste_tap_date = 0
+
+// Taps have to happen before these
+// milliseconds
 Dub.limit = 300
 
+// Key input listener
 Dub.start_hook = function (on_keydown) {
   const ioHook = require('iohook')
   ioHook.on("keyup", on_keydown)
@@ -20,11 +29,11 @@ Dub.start_hook = function (on_keydown) {
 }
 
 Dub.copy = function () {
-  execSync("xdotool key ctrl+c")
+  execSync("xdotool key Control_L+c")
 }
 
 Dub.paste = function () {
-  execSync("xdotool key ctrl+v")
+  execSync("xdotool key Control_L+v")
 }
 
 Dub.copy_tap = function () {
