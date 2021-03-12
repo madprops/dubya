@@ -28,8 +28,17 @@ Dub.start_hook = function (on_keydown) {
   ioHook.start()
 }
 
+Dub.focus = function () {
+  let id = execSync('xdotool getmouselocation --shell 2>/dev/null | grep WINDOW')
+            .toString().replace(/\D+/g, '').trim()
+  execSync(`wmctrl -i -a ${id}`)
+}
+
 Dub.copy = function () {
-  execSync("xdotool key Control_L+c")
+  Dub.focus()
+  setTimeout(() => {
+    execSync("xdotool key Control_L+c")   
+  }, 100)
 }
 
 Dub.paste = function () {
